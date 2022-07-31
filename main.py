@@ -33,12 +33,12 @@ state = MockState(
 )
 
 
-# @app.middleware("http")
-# async def process_auth(request: Request, call_next):
-#     check_string = request.headers.get('X-CHECK-STRING')
-#     # if not check_string:
-#     #     return JSONResponse(status_code=400, content={'detail': 'No X-CHECK-STRING provided'})
-#     return await call_next(request)
+@app.middleware("http")
+async def process_auth(request: Request, call_next):
+    check_string = request.headers.get('X-CHECK-STRING')
+    # if not check_string:
+    #     return JSONResponse(status_code=400, content={'detail': 'No X-CHECK-STRING provided'})
+    return await call_next(request)
 
 
 @app.post("/getUser")
