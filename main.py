@@ -4,6 +4,7 @@ from typing import Optional, Union, List
 
 from fastapi import FastAPI, Request, HTTPException
 from pydantic import BaseModel
+from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 
 from pure import to_decimal, calc_multiplier
@@ -21,6 +22,11 @@ class MockState(BaseModel):
 
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+)
+
 state = MockState(
     balance=to_decimal(1000)
 )
@@ -29,8 +35,8 @@ state = MockState(
 @app.middleware("http")
 async def process_auth(request: Request, call_next):
     check_string = request.headers.get('X-CHECK-STRING')
-    if not check_string:
-        return JSONResponse(status_code=400, content={'detail': 'No X-CHECK-STRING provided'})
+    # if not check_string:
+    #     return JSONResponse(status_code=400, content={'detail': 'No X-CHECK-STRING provided'})
     return await call_next(request)
 
 
