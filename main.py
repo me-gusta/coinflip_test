@@ -131,4 +131,5 @@ async def multiply_cashout():
 
     multiplier = calc_multiplier(state.game.flips_count)
     state.balance += to_decimal(state.game.bet * multiplier)
+    state.game = None
     return {'balance': state.balance}
