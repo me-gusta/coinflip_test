@@ -46,8 +46,8 @@ async def get_user():
     if state.game:
         game = {
             "history": state.game.history,
-            "flips_count": state.game.flips_count,
-            "bet": state.game.bet
+            "bet": state.game.bet,
+            "multiplier": calc_multiplier(state.game.flips_count)
         }
     else:
         game = None
@@ -56,7 +56,8 @@ async def get_user():
         "balance": state.balance,
         "language_code": "ru",
         "preferences": {
-            "last_bet": to_decimal("1")
+            "last_bet": to_decimal("1"),
+            "last_type": random.choice(['instant', 'multiply'])
         }}
 
 
