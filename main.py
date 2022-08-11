@@ -116,7 +116,7 @@ async def multiply_play(params: MultiplyPlay):
         state.game.history.append(params.prediction)
         state.game.flips_count += 1
         return {'victory': True,
-                "flips_count": state.game.flips_count,
+                "multiplier_next": calc_multiplier(state.game.flips_count + 1),
                 "multiplier": calc_multiplier(state.game.flips_count)}
     else:
         state.balance -= state.game.bet
