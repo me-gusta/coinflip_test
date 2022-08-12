@@ -47,7 +47,8 @@ async def get_user():
         game = {
             "history": state.game.history,
             "bet": state.game.bet,
-            "multiplier": calc_multiplier(state.game.flips_count)
+            "multiplier": calc_multiplier(state.game.flips_count),
+            "next_multiplier": calc_multiplier(state.game.flips_count + 1)
         }
     else:
         game = None
