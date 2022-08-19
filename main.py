@@ -102,10 +102,10 @@ class MultiplyPlay(BaseModel):
 @app.post('/multiply/play')
 async def multiply_play(params: MultiplyPlay):
     if not state.game:
-        if not params.bet:
+        if params.bet is None:
             raise HTTPException(status_code=400, detail=f'No bet specified')
         state.game = MultiplyGame(bet=to_decimal(params.bet))
-    elif params.bet:
+    elif params.bet is not None:
         raise HTTPException(status_code=400, detail=f'A running game found. bets cannot be accepted.')
 
     if params.win is not None:
